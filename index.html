@@ -9,48 +9,88 @@
     <style>
         /* Base Styles */
         :root {
-           --primary-blue: #000000;
-    --secondary-blue: #eff4fa;
-    --light-gray: #585858;
-    --medium-gray: #e9ecef;
-    --dark-gray: #a1a1a1;
-    --text-color: #ffffff;
-    --border-color: #000000;
-    --shadow-light: rgb(255 255 255);
-    --shadow-medium: rgb(0 0 0);
-    --shadow-strong: rgb(255 255 255);
-    --success-color: #3ebe5b;
-    --danger-color: #ff3145;
+            --primary-accent: #8A2BE2; /* A Mysterious Violet */
+            --secondary-accent: #4B0082; /* Darker Indigo, for headings/stronger accents */
+            --background-dark: #121212; /* Very Dark Background */
+            --surface-dark: #1A1A1A; /* Slightly lighter dark for main content area */
+            --card-dark: #222222; /* Even lighter dark for cards */
+            --text-light: #FFFFFF; /* White for High Contrast Text */
+            --text-medium: #E0E0E0; /* Slightly off-white for body text */
+            --border-dark: #555555; /* Darker Border for inputs/elements */
+            --shadow-dark-light: rgba(0, 0, 0, 0.3); /* Adjusted Shadows for Dark Mode */
+            --shadow-dark-medium: rgba(0, 0, 0, 0.5);
+            --shadow-dark-strong: rgba(0, 0, 0, 0.7);
+            --neon-success: #00FF7F; /* Neon Green for success/free badges */
+            --neon-danger: #FF4500; /* Neon Orange-Red for danger/paid badges */
+            /* NEW: Glow Colors */
+            --glow-color-light: rgba(138, 43, 226, 0.5);
+            --glow-color-strong: rgba(138, 43, 226, 0.8);
+            --neon-success-glow: rgba(0, 255, 127, 0.9);
+            --neon-danger-glow: rgba(255, 69, 0, 0.9);
         }
 
         body {
-            font-family: 'Roboto', sans-serif; /* Readable body font */
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light-gray);
-            color: var(--text-color);
+            background-color: var(--background-dark);
+            color: var(--text-medium);
             line-height: 1.6;
-            scroll-behavior: smooth; /* Smooth scrolling for potential anchor links */
+            scroll-behavior: smooth;
+        }
+
+        /* NEW: Keyframe Animations for Glowing Effects */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px var(--glow-color-light); }
+            50% { box-shadow: 0 0 20px var(--glow-color-strong); }
+            100% { box-shadow: 0 0 5px var(--glow-color-light); }
+        }
+
+        @keyframes subtle-text-glow {
+            0% { text-shadow: 0 0 5px var(--glow-color-light); }
+            50% { text-shadow: 0 0 12px var(--glow-color-strong); }
+            100% { text-shadow: 0 0 5px var(--glow-color-light); }
+        }
+
+        @keyframes badge-success-pulse {
+            0% { box-shadow: 0 0 5px var(--neon-success); }
+            50% { box-shadow: 0 0 15px var(--neon-success-glow); }
+            100% { box-shadow: 0 0 5px var(--neon-success); }
+        }
+
+        @keyframes badge-danger-pulse {
+            0% { box-shadow: 0 0 5px var(--neon-danger); }
+            50% { box-shadow: 0 0 15px var(--neon-danger-glow); }
+            100% { box-shadow: 0 0 5px var(--neon-danger); }
+        }
+
+        @keyframes background-aura {
+            0% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.15; transform: scale(1.01); }
+            100% { opacity: 0.1; transform: scale(1); }
         }
 
         /* Header Styles */
         header {
-            background-color: #545454;
+            background-color: #000000;
             padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 6px 20px var(--shadow-light);
+            box-shadow: 0 6px 20px var(--shadow-dark-light);
             margin-bottom: 40px;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
 
         header h1 {
-            font-family: 'Poppins', sans-serif; /* Striking heading font */
+            font-family: 'Poppins', sans-serif;
             margin-bottom: 30px;
-            font-size: 3em; /* Larger, more impactful */
-            color: var(--primary-blue);
+            font-size: 3em;
+            color: var(--primary-accent);
             font-weight: 700;
-            letter-spacing: -0.02em; /* Slightly tighter for modern feel */
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
+            /* NEW: Glowing text animation */
+            animation: subtle-text-glow 3s infinite alternate;
         }
 
         /* Search Container */
@@ -62,19 +102,28 @@
             padding: 15px 25px;
             width: 80%;
             max-width: 650px;
-            border: 2px solid var(--border-color); /* More defined border */
-            border-radius: 35px; /* Very rounded, modern pill shape */
+            border: 2px solid var(--border-dark);
+            border-radius: 35px;
             font-size: 1.15em;
             outline: none;
             transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 12px var(--shadow-light);
-            text-align: center; /* Center placeholder text */
+            box-shadow: 0 4px 12px var(--shadow-dark-light);
+            text-align: center;
+            background-color: var(--card-dark);
+            color: var(--text-light);
+        }
+
+        #searchInput::placeholder {
+            color: var(--border-dark);
         }
 
         #searchInput:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.3); /* Stronger, softer halo */
-            transform: scale(1.01); /* Subtle grow effect */
+            border-color: var(--primary-accent);
+            /* NEW: Enhanced glowing box shadow on focus */
+            box-shadow: 0 0 0 5px rgba(138, 43, 226, 0.3), 0 0 30px var(--glow-color-strong);
+            transform: scale(1.01);
+            /* NEW: Pulsing animation on focus */
+            animation: pulse 1.5s infinite;
         }
 
         /* Categories Navigation */
@@ -83,65 +132,114 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px; /* More space between buttons */
+            gap: 15px;
             padding: 0 20px;
         }
 
         .category-btn {
-            background-color: var(--medium-gray); /* Lighter, subtle background */
-            color: black;
-            border: none; /* Rely on background and shadow */
+            background-color: var(--card-dark);
+            color: var(--text-light);
+            border: none;
             padding: 14px 30px;
             border-radius: 30px;
             cursor: pointer;
             font-size: 1em;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow-light); /* Gentle shadow */
-            flex-shrink: 0; /* Prevent shrinking on smaller screens */
+            box-shadow: 0 2px 8px var(--shadow-dark-light);
+            flex-shrink: 0;
+            position: relative; /* Needed for pseudo-element glow */
+            overflow: hidden; /* Ensures glow doesn't spill out */
+            z-index: 1; /* To ensure button content is above glow */
+        }
+
+        /* NEW: Pseudo-element for hover glow effect */
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            background: linear-gradient(45deg, transparent, var(--primary-accent), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease-out;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        .category-btn:hover::before {
+            transform: translateX(100%);
         }
 
         .category-btn:hover {
-            background-color: var(--primary-blue);
+            background-color: var(--primary-accent);
             color: #fff;
-            transform: translateY(-4px); /* More noticeable lift */
-            box-shadow: 0 6px 15px var(--shadow-medium);
+            transform: translateY(-4px);
+            /* NEW: Enhanced glow on hover */
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.7), 0 0 25px var(--glow-color-strong);
         }
 
         .category-btn.active {
-            background-color: var(--primary-blue);
+            background-color: var(--primary-accent);
             color: #fff;
-            box-shadow: 0 6px 15px var(--shadow-strong);
-            transform: translateY(-2px); /* Slightly lifted when active */
+            /* NEW: Stronger glow when active */
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.8), 0 0 35px var(--glow-color-strong);
+            transform: translateY(-2px);
+            /* NEW: Pulsing animation for active button */
+            animation: pulse 2s infinite alternate;
         }
 
         /* Main Content Area */
         main {
-            max-width: 1280px; /* Slightly wider main container */
+            max-width: 1280px;
             margin: 40px auto;
             padding: 40px;
-            background-color: #464646;
+            background-color: var(--surface-dark);
             border-radius: 15px;
-            box-shadow: 0 8px 30px var(--shadow-medium); /* More significant shadow for the main block */
+            box-shadow: 0 8px 30px var(--shadow-dark-medium);
+            position: relative; /* For ambient background glow */
+            overflow: hidden; /* To contain background aura */
+        }
+
+        /* NEW: Ambient background glow for main content */
+        main::before {
+            content: '';
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            width: 110%;
+            height: 110%;
+            background: radial-gradient(circle at top left, var(--glow-color-light) 0%, transparent 40%),
+                        radial-gradient(circle at bottom right, var(--glow-color-light) 0%, transparent 40%);
+            opacity: 0.08; /* More subtle */
+            border-radius: 15px;
+            pointer-events: none;
+            animation: background-aura 15s infinite alternate ease-in-out;
+            z-index: 0; /* Ensure it's behind content */
         }
 
         /* Section Headings */
         section h2 {
             font-family: 'Poppins', sans-serif;
             text-align: center;
-            color: var(--secondary-blue); /* Slightly darker blue for section headings */
+            color: var(--secondary-accent);
             margin-bottom: 45px;
             font-size: 2.6em;
-            border-bottom: 3px solid var(--medium-gray); /* Thicker, softer divider */
+            border-bottom: 3px solid var(--border-dark);
             padding-bottom: 20px;
             font-weight: 700;
+            text-shadow: 0 0 10px rgba(75, 0, 130, 0.5);
+            /* NEW: Glowing text animation for section headings */
+            animation: subtle-text-glow 4s infinite alternate;
         }
 
         /* Tool Grid Layout */
         .tool-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Slightly wider cards */
-            gap: 35px; /* More generous spacing */
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
             padding: 20px 0;
         }
 
@@ -149,20 +247,21 @@
         .tool-card {
             position: relative;
             border: none;
-            border-radius: 15px; /* More rounded */
-            padding: 30px; /* More internal padding */
+            border-radius: 15px;
+            padding: 30px;
             text-align: center;
-            background-color: #010212;
-            box-shadow: 0 5px 20px var(--shadow-light); /* Softer initial shadow */
+            background-color: var(--card-dark);
+            box-shadow: 0 5px 20px var(--shadow-dark-medium);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            overflow: hidden; /* Ensures no overflow from rounded corners */
+            overflow: hidden;
+            z-index: 1; /* Ensures cards are above main's aura */
         }
 
-        .tool-card::before { /* Subtle border effect on hover */
+        .tool-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -171,75 +270,86 @@
             bottom: 0;
             border-radius: 15px;
             border: 2px solid transparent;
-            transition: border-color 0.3s ease-in-out;
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
             pointer-events: none;
         }
 
         .tool-card:hover {
-            transform: translateY(-10px); /* Significant lift on hover */
-            box-shadow: 0 12px 35px var(--shadow-strong); /* Stronger, deeper shadow */
-            z-index: 1; /* Bring hovered card slightly forward */
+            transform: translateY(-10px);
+            /* NEW: Stronger, glowing box shadow on hover */
+            box-shadow: 0 12px 35px var(--shadow-dark-strong), 0 0 40px var(--glow-color-strong);
+            z-index: 2; /* Bring to front on hover */
         }
 
         .tool-card:hover::before {
-            border-color: var(--primary-blue); /* Highlight border on hover */
+            border-color: var(--primary-accent);
+            /* NEW: Internal border glow on hover */
+            box-shadow: inset 0 0 15px var(--glow-color-strong);
         }
 
         .tool-card img {
-            max-width: 100px; /* Larger logo */
+            max-width: 100px;
             height: auto;
             margin-bottom: 25px;
             border-radius: 50%;
-            border: 4px solid var(--medium-gray); /* Thicker, softer border */
-            box-shadow: 0 4px 10px var(--shadow-light); /* More pronounced logo shadow */
+            border: 4px solid var(--border-dark);
+            box-shadow: 0 4px 10px var(--shadow-dark-light);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* NEW: Image glow on card hover */
+        .tool-card:hover img {
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 20px var(--glow-color-strong);
         }
 
         .tool-card h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8em; /* Larger, bolder heading */
+            font-size: 1.8em;
             margin-bottom: 15px;
-            color: var(--dark-gray);
+            color: var(--text-light);
             font-weight: 600;
             letter-spacing: -0.01em;
         }
 
         .tool-card p {
-            font-size: 1.05em; /* Slightly larger description font */
-            color: var(--text-color);
+            font-size: 1.05em;
+            color: var(--text-medium);
             flex-grow: 1;
             margin-bottom: 30px;
-            min-height: 80px; /* Ensure consistent description height */
+            min-height: 80px;
             line-height: 1.5;
             text-align: center;
         }
 
         .tool-card .visit-btn {
             display: inline-block;
-            background-color: white;
-            color: #000000;
+            background-color: var(--primary-accent);
+            color: #fff;
             padding: 14px 35px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-            text-transform: uppercase; /* All caps for CTA */
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .tool-card .visit-btn:hover {
-            background-color: var(--secondary-blue);
+            background-color: var(--secondary-accent);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgb(255, 255, 255);
+            /* NEW: Button glow on hover */
+            box-shadow: 0 6px 20px rgba(75, 0, 130, 0.4), 0 0 30px var(--glow-color-strong);
         }
 
         /* Badge specific styles */
         .tool-badge {
             position: absolute;
-            top: 18px; /* Adjusted position */
-            right: 18px; /* Adjusted position */
+            top: 18px;
+            right: 18px;
             padding: 8px 15px;
-            border-radius: 10px; /* Softer corners */
+            border-radius: 10px;
             font-size: 0.9em;
             font-weight: bold;
             color: white;
@@ -247,29 +357,38 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 2px 8px var(--shadow-light);
+            box-shadow: 0 2px 8px var(--shadow-dark-light);
             text-transform: uppercase;
         }
 
         .tool-badge.free {
-            background-color: var(--success-color);
+            background-color: var(--neon-success);
+            text-shadow: 0 0 5px rgba(0, 255, 127, 0.5);
+            /* NEW: Pulsing glow for free badge */
+            animation: badge-success-pulse 2s infinite alternate;
         }
 
         .tool-badge.paid {
-            background-color: var(--danger-color);
+            background-color: var(--neon-danger);
+            text-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+            /* NEW: Pulsing glow for paid badge */
+            animation: badge-danger-pulse 2s infinite alternate;
         }
 
         /* No Results Message */
         #no-results {
             text-align: center;
             font-size: 1.4em;
-            color: var(--text-color);
+            color: var(--text-light);
             padding: 80px 30px;
-            background-color: var(--medium-gray);
+            background-color: var(--surface-dark);
             border-radius: 15px;
             margin-top: 50px;
-            box-shadow: inset 0 2px 10px var(--shadow-light);
+            box-shadow: inset 0 2px 10px var(--shadow-dark-light);
             font-weight: 500;
+            /* NEW: Dashed border and pulsing glow for no results */
+            border: 2px dashed var(--primary-accent);
+            animation: pulse 2s infinite alternate;
         }
 
         /* Footer Styles */
@@ -277,12 +396,12 @@
             text-align: center;
             padding: 30px;
             margin-top: 50px;
-            background-color: var(--dark-gray);
-            color: #333333;
+            background-color: #000000;
+            color: var(--text-medium);
             font-size: 1em;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
-            box-shadow: 0 -6px 20px var(--shadow-light);
+            box-shadow: 0 -6px 20px var(--shadow-dark-light);
         }
 
         /* Responsive Design */
@@ -368,7 +487,7 @@
             }
             .tool-card p {
                 font-size: 0.95em;
-                min-height: unset; /* Remove min-height for mobile to avoid awkward spacing */
+                min-height: unset;
             }
             .tool-card .visit-btn {
                 padding: 12px 28px;
@@ -488,7 +607,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 AI Tool Discovery By Mustakim Sawod. All rights reserved.</p>
+        <p>&copy; 2025 AI Tool Discovery. All rights reserved.</p>
     </footer>
 
     <script src="script.js"></script>
